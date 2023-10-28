@@ -114,10 +114,9 @@ fun draw-flag(flag :: String, width :: Number):
     # Place the elements of the flag
     place-image(inner-cross-hor, innerHorX, innerHorY,
       place-image(inner-cross-vert, innerVertX, innerVertY,
-        place-image(outer-cross-hor, outerHorX, outerHorY,
-          place-image(outer-cross-vert, outerVertX, outerVertY,
-            place-image(outer-cross-hor, outerHorX, outerHorY,
-              rectangle(width, height, "solid", base))))))
+         place-image(outer-cross-vert, outerVertX, outerVertY,
+           place-image(outer-cross-hor, outerHorX, outerHorY,
+             rectangle(width, height, "solid", base)))))
   else:
     # No row is found corresponding to the selected country
     "Incorrect country code. Try the function show-country-codes() to get a list of available countries"
