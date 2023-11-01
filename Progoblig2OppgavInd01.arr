@@ -8,7 +8,7 @@ menu = table: function-name :: String, description :: String
   row: "draw-flag(country-code :: String, width :: Number)", "Draw the flag of a country at a given width in pixels"
   row: "show-country-codes()", "Displays a table of the available country codes"
   row: "show-menu()", "Displays this menu again"
-  row: "list-all-flags(width :: Number)", "Creates a list with all the flags at a given width"
+  row: "list-all-flags(width :: Number)", "Displays a table with countries, country codes, and flags at width in pixels"
 end
 
 fun show-menu():
@@ -55,6 +55,7 @@ end
 fun show-country-codes() -> Table:
   flag-codes
 end
+
 
 fun draw-flag(flag :: String, width :: Number):
   # Find the row in the flag-info containing information about the selected country
@@ -125,15 +126,20 @@ fun draw-flag(flag :: String, width :: Number):
   end
 end
 
-var code-num = 0
-
 fun list-all-flags(width :: Number):
   # Extract all country codes from the flag-codes table into a list
   list-of-codes = flag-codes.get-column("code") 
-  for map(code from list-of-codes):
-    draw-flag(code, width)
-  end
+
+  # Create a new list with all the flags drawn
+  list-of-drawn-flags = list-of-codes.map(lam(c): draw-flag(c, width)end)
+  
+  # Create a new table from from the flag-codes table, and add a column with the drawn flags
+  table-of-drawn-flags = flag-codes.add-column("flag", list-of-drawn-flags)
+  
+  # Display the table with the flags
+  table-of-drawn-flags
 end
+
 
 
 # Remove the comments below to draw all flags on run
