@@ -13,7 +13,7 @@ end
 
 # Funksjonen for å beregne forbruket fra bil
 fun car-energy(distance :: Number, distance-per-unit-fuel :: Number) -> Number:
-  energy-per-unit-fuel = 10
+  energy-per-unit-fuel = 10 # Konstant verdi hentet fra forelesningsnotatene
   (distance / distance-per-unit-fuel) * energy-per-unit-fuel
 end
 
@@ -26,16 +26,17 @@ fun energi-to-number(str :: String) -> Number:
       # | none => 0
       
       # Modifisert case
-    | none => car-energy(50,12)
+     | none => car-energy(50,12)
   end
 where:
   # Den første testen feiler etter å ha modifisert case
   # energi-to-number("") is 0
+  energi-to-number("") is car-energy(50,12)
   energi-to-number("48") is 48
 end
 
 # Fjern kommentar på neste linje for å se tabellen før transformasjon.
-#kWh-wealthy-consumer-data
+# kWh-wealthy-consumer-data
 
 transformed-kWh-wealthy-consumer-data = transform-column(kWh-wealthy-consumer-data, "energi", energi-to-number)
 transformed-kWh-wealthy-consumer-data
